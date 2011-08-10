@@ -1,0 +1,29 @@
+<?php
+
+include_once('scholar_status.features.inc');
+
+/**
+ * Implementation of hook_context_links_alter().
+ */
+function scholar_status_context_links_alter(&$links) {
+  if (!empty($links['status'])) {
+    $links['status']['query'] = drupal_get_destination();
+  }
+}
+
+/**
+ * hook vsite_widgets
+ */
+function scholar_status_vsite_widgets(){
+  $items = array();
+  $items['views-scholar_status-block_1'] = array(
+        'module' => 'views',
+        'delta' => 'scholar_status-block_1',
+        'weight' => -21,
+        'region' => false,
+        'status' => '0',
+        'label' => 'Latest Status',
+        'type' => 'context_ui',
+      );
+  return $items;
+}
